@@ -2,7 +2,7 @@
   <ul class="nav-bar clear">
     <li class="left" v-for="(item,index) in nav" :key="index">
       <Router-Link :to="item.url">
-        <img :src="item.icon">
+        <img :src="item.url==current?item.active_icon:item.icon">
       </Router-Link>
     </li>
   </ul>
@@ -11,7 +11,7 @@
 export default {
   data() {
     return {
-      current:'/'
+      current: "/",
       nav: [
         {
           url: "/",
@@ -31,7 +31,6 @@ export default {
         {
           url: "/cart",
           icon: require("@/assets/icons/cart.png")
-         
         },
         {
           url: "/user",
@@ -42,32 +41,28 @@ export default {
     };
   },
   mounted() {
-			// 当前路由对象  this.$route
-			// 获取当前的路径
-			this.current = this.$route.path;
-		}
+    // 当前路由对象  this.$route
+    // 获取当前的路径
+    this.current = this.$route.path;
+  }
 };
 </script>
 <style lang="less">
-
-.nav-bar{
+.nav-bar {
   position: fixed;
   bottom: 0;
   width: 100%;
-	background-color: #FFFFFF;
-	box-shadow: 0 0 10px 0 hsla(0, 6%, 58%, .6);
-  z-index: 20;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px 0 hsla(0, 6%, 58%, 0.6);
+  z-index: 999;
 
-  li{
+  li {
     // float: left;
     width: 20%;
-text-align: center;
+    text-align: center;
   }
   img {
-			width: 1.2rem;
-		}
+    width: 1.2rem;
+  }
 }
-
-
-
 </style>
