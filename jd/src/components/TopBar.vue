@@ -72,6 +72,8 @@ export default {
   position: fixed;
   left: 0;
   top: 0;
+  z-index: 30;
+
   .go_back {
     width: 0.8rem;
     height: 0.9rem;
@@ -94,7 +96,7 @@ export default {
       top: 1.1rem;
       background-color: rgba(0, 0, 0, 0.9);
       border-radius: 4px;
-      z-index: 9999;
+      z-index: 30;
       li {
         width: 2.5rem;
         height: 0.8rem;
@@ -118,7 +120,7 @@ export default {
         height: 0.8rem;
         width: 1.7rem;
         display: inline-block;
-        border-bottom: 1px solid hsla(0, 0%, 100%, .2);
+        border-bottom: 1px solid hsla(0, 0%, 100%, 0.2);
       }
     }
   }
