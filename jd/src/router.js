@@ -5,6 +5,7 @@ import Cart from './views/Cart.vue'
 import Category from './views/Category.vue'
 import Pin from './views/Pin.vue'
 import User from './views/User.vue'
+import Product from './views/Product.vue'
 
 // https://router.vuejs.org/zh/     路由文档
 
@@ -38,6 +39,15 @@ export default new Router({
       path: '/user',
       name: 'user',
       component: User
+    },
+    {
+      //声明ID参数
+      // 动态路径参数 以冒号开头
+      //一个“路径参数”使用冒号 : 标记。
+      //当匹配到一个路由时，参数值会被设置到 this.$route.params，可以在每个组件内使用。
+      path: '/product/:id',
+      name: 'product',
+      component: Product
     }
   ]
 })
