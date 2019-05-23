@@ -25,7 +25,21 @@
 			}
 		},
 		created(){
-			window.onscroll = ()=>{
+
+			//这个添加事件监听只能监听一个，下面的事件会覆盖上面的事件
+			// window.onscroll = ()=>{
+			// 	var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+			// 	if(scrollTop >=20){
+			// 		this.isFixed = true;
+			// 	}else{
+			// 		this.isFixed = false;
+			// 	}
+				
+			// }
+
+
+			//添加滚动事件监听，这个监听事件可以添加多个
+			window.addEventListener('scroll',()=>{
 				var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
 				if(scrollTop >=20){
 					this.isFixed = true;
@@ -33,7 +47,7 @@
 					this.isFixed = false;
 				}
 				
-			}
+			})
 		}
 	}
 </script>

@@ -5,7 +5,8 @@
       <div class="buy-bar-main"></div>
       <div class="buy-bar-bottom" @click="hide">确认</div>
     </div>
-    <div class="mask" @click="hide" :style="{display: show?'block':'none'}"></div>
+    <!-- 遮盖层也要加上v-show，不加遮盖层一直在，其他操作不能执行 -->
+    <div class="mask" @click="hide" v-show="show"></div>
   </div>
 </template>
 <script>
@@ -68,6 +69,7 @@ export default {
     bottom: 0;
     right: 0;
     z-index: 40;
+    background-color: rgba(0, 0, 0, 0.7)
   }
 }
 </style>

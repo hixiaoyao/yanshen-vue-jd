@@ -6,7 +6,7 @@
           <li
             class="flex-item"
             :class="{active:index==navIndex}"
-            @click="navIndex=index;"
+            @click="navIndex=index;scrollTop(item.top);"
             v-for="(item,index) in nav"
             :key="index"
           >
@@ -15,45 +15,92 @@
         </ul>
       </div>
     </top-bar>
-    <br>
-    <br>
-    <br>
-    <h1>{{ $route.params.id }}</h1>
-    <bottom-bar v-model="show"></bottom-bar>
+    <div style="height:0.9rem;"></div>
 
-    <transition name="bounce" >
-      <buy-bar v-model="show"></buy-bar>
-    </transition>
+    <div ref="product" style="height:1000px;">
+      <swiper></swiper>
+    </div>
+
+    <div ref="comment" style="height: 1000px;">
+      <h1>评价</h1>
+    </div>
+
+    <div ref="detail" style="height: 1000px;">
+      <h1>详情</h1>
+    </div>
+
+    <div ref="recommend" style="height: 1000px;">
+      <h1>推荐</h1>
+    </div>
+    <h1>{{ $route.params.id }}</h1>
+    <back-top></back-top>
+    <bottom-bar></bottom-bar>
   </div>
 </template>
 
 <script>
 import TopBar from "@/components/TopBar";
 import BottomBar from "@/components/BottomBar";
-import BuyBar from "@/components/BuyBar";
+import Swiper from "../components/ProductSwiper";
+import BackTop from "../components/BackTop";
 
 export default {
   data() {
     return {
       navIndex: 0,
       nav: [
-        { title: "商品" },
-        { title: "评价" },
-        { title: "详情" },
-        { title: "推荐" }
+        { title: "商品", top: 0 },
+        { title: "评价", top: 0 },
+        { title: "详情", top: 0 },
+        { title: "推荐", top: 0 }
       ],
       show: false
     };
   },
-  methods: {
-    buyshow() {
-      this.show = true;
-    }
-  },
+
   components: {
     TopBar,
     BottomBar,
-    BuyBar
+    Swiper,
+    BackTop
+  },
+  methods: {
+    getTopOffset() {
+      this.nav[0].top = this.$refs["product"].offsetTop;
+      this.nav[1].top = this.$refs["comment"].offsetTop;
+      this.nav[2].top = this.$refs["detail"].offsetTop;
+      this.nav[3].top = this.$refs["recommend"].offsetTop;
+      console.log(this.nav);
+    },
+    //点击上面图标进行跳转动画
+    scrollTop(val) {
+      // 当前值
+      let scrollTop =
+        document.documentElement.scrollTop ||
+        window.pageYOffset ||
+        document.body.scrollTop;
+      // 目标值
+      let target = val - 50;
+      // 动画时长
+      let duration = 3000;
+      // 动画次数
+      let count = 200;
+      // 时间片
+      let timeOut = duration / count;
+      // 步进值
+      let step = (target - scrollTop) / count;
+
+      let t = setInterval(() => {
+        scrollTop += step;
+        document.documentElement.scrollTop = scrollTop;
+        count--;
+        if (count <= 0) {
+          clearInterval(t);
+        }
+      }, timeOut);
+
+      document.documentElement.scrollTop = val - 50;
+    }
   },
   created() {
     // 全局路由对象
@@ -62,6 +109,21 @@ export default {
     console.log(this.$route);
 
     //			console.log(this.$route.params.id);
+
+    window.addEventListener("scroll", () => {
+      var scrollTop =
+        document.documentElement.scrollTop ||
+        window.pageYOffset ||
+        document.body.scrollTop;
+      this.nav.forEach((item, index) => {
+        if (Math.abs(item.top - scrollTop) < 80) {
+          this.navIndex = index;
+        }
+      });
+    });
+  },
+  mounted() {
+    this.getTopOffset();
   }
 };
 </script>
@@ -106,24 +168,24 @@ export default {
 //   height: 0;
 // }
 
-.bounce-enter-active {
-	animation: bounce 2s linear;
-}
+// .bounce-enter-active {
+//   animation: bounce 2s linear;
+// }
 
-.bounce-leave-active {
-  animation: bounce 2s linear reverse;
-}
+// .bounce-leave-active {
+//   animation: bounce 2s linear reverse;
+// }
 
-@keyframes bounce {
-  from {
-    -webkit-transform: scale(0);
-  }
+// @keyframes bounce {
+//   from {
+//     -webkit-transform: translateY(100%);
+//   }
 
-  50% {
-    -webkit-transform: scale(1.5);
-  }
-  to {
-    -webkit-transform: scale(1);
-  }
-}
+//   50% {
+//     -webkit-transform: translateY(100%);
+//   }
+//   to {
+//     -webkit-transform: translateY(0%);
+//   }
+// }
 </style>
