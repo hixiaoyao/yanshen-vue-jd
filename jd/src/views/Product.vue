@@ -32,8 +32,9 @@
     <div ref="recommend" style="height: 1000px;">
       <h1>推荐</h1>
     </div>
-    <h1>{{ $route.params.id }}</h1>
-    <back-top></back-top>
+    <!-- <h1>{{ $route.params.id }}</h1> -->
+    <!-- 组件back-top没有@click时间，需要在组件内输出一个自定义时间 -->
+    <back-top @click="backTop" :style="{display:show1?'block':'none'}"></back-top>
     <bottom-bar></bottom-bar>
   </div>
 </template>
@@ -54,7 +55,8 @@ export default {
         { title: "详情", top: 0 },
         { title: "推荐", top: 0 }
       ],
-      show: false
+      show: false,
+      show1: false
     };
   },
 
@@ -70,7 +72,7 @@ export default {
       this.nav[1].top = this.$refs["comment"].offsetTop;
       this.nav[2].top = this.$refs["detail"].offsetTop;
       this.nav[3].top = this.$refs["recommend"].offsetTop;
-      console.log(this.nav);
+      // console.log(this.nav);
     },
     //点击上面图标进行跳转动画
     scrollTop(val) {
@@ -100,6 +102,10 @@ export default {
       }, timeOut);
 
       document.documentElement.scrollTop = val - 50;
+    },
+    backTop() {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
     }
   },
   created() {
@@ -115,9 +121,18 @@ export default {
         document.documentElement.scrollTop ||
         window.pageYOffset ||
         document.body.scrollTop;
+      if (scrollTop >= 1050) {
+        this.show1 = true;
+      } else {
+        this.show1 = false;
+      }
+      // console.log(this.show1);
+      // console.log(scrollTop);
+
       this.nav.forEach((item, index) => {
         if (Math.abs(item.top - scrollTop) < 80) {
           this.navIndex = index;
+          // console.log(item.top);
         }
       });
     });

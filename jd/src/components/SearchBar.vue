@@ -41,12 +41,14 @@
 			//添加滚动事件监听，这个监听事件可以添加多个
 			window.addEventListener('scroll',()=>{
 				var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
-				if(scrollTop >=20){
+				if(scrollTop >=1200){
 					this.isFixed = true;
 				}else{
 					this.isFixed = false;
+					
 				}
-				
+				 console.log(this.isFixed);
+				  console.log(scrollTop);
 			})
 		}
 	}

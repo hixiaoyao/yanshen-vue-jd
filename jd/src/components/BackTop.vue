@@ -1,5 +1,5 @@
 <template>
-    <div class="back-top"></div>
+    <div class="back-top" @click="$emit('click')"></div>
 </template>
 <script>
 export default {
@@ -12,7 +12,7 @@ export default {
     position: fixed;
     right: 0;
     bottom: 1.6rem;
-    z-index: 107;
+    z-index:9999;
     width: 0.8rem;
     height: 0.8rem;
     overflow: hidden;
