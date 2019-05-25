@@ -280,9 +280,9 @@ export default {
 #category {
   width: 100%;
   height: 100%;
-  box-sizing: border-box;
-  padding: 0.9rem 0 0.9rem;
 
+  padding: 0.9rem 0 0.9rem;
+  box-sizing: border-box;
   // background-color: red;
   .warp {
     height: 100%;

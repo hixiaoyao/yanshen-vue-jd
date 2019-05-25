@@ -33,7 +33,7 @@ export default {
           icon: require("@/assets/icons/cart.png")
         },
         {
-          url: "/user",
+          url: "/loginpage",
           icon: require("@/assets/icons/user.png"),
           active_icon: require("@/assets/icons/user_active.png")
         }

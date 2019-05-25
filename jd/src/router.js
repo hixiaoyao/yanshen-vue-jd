@@ -4,7 +4,7 @@ import Home from './views/Home.vue'
 import Cart from './views/Cart.vue'
 import Category from './views/Category.vue'
 import Pin from './views/Pin.vue'
-import User from './views/User.vue'
+import LoginPage from './views/LoginPage.vue'
 import Product from './views/Product.vue'
 
 // https://router.vuejs.org/zh/     路由文档
@@ -36,9 +36,9 @@ export default new Router({
       component: Pin
     },
     {
-      path: '/user',
-      name: 'user',
-      component: User
+      path: '/LoginPage',
+      name: 'loginpage',
+      component: LoginPage
     },
     {
       //声明ID参数
