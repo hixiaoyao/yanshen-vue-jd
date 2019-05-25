@@ -136,5 +136,12 @@ export default {
     right: 0;
     top: 0;
   }
+  .title{
+    font-size: 0.36rem;
+    color: #333;
+    text-align: center;
+    line-height: 0.9rem;
+
+  }
 }
 </style>
